@@ -1,0 +1,23 @@
+/* table{
+    border: 2px solid black;
+}
+tr, td{
+    border: 1px solid;
+    padding: 5px 10px;
+}
+.day-current-day{
+    padding: 5px;
+    color: black;
+}
+.day{
+    padding: 5px;
+    color: black;
+} */
+.current-day{
+    background-color: rgb(138, 138, 248);
+    color: white;
+}
+.theme{
+    margin: 20px;
+    background-color: tomato;
+}
