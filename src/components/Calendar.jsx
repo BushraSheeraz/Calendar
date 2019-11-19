@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Table from 'react-bootstrap/Table';
+import { thisExpression } from '@babel/types';
 
 export default class Calendar extends Component {
     constructor(props) {
@@ -39,6 +40,53 @@ export default class Calendar extends Component {
         let dateContext = this.state.dateContext;
         let firstDay = moment(dateContext).startOf("month").format("d");
         return firstDay;
+    }
+
+    setMonth = (month) => {
+        let monthNo = this.months.indexOf(month);
+        let dateContext = Object.assign({}, this.state.dateContext);
+        dateContext = moment(dateContext).set("month", monthNo);
+        this.setState({
+            dateContext: dateContext
+        });
+    }
+    onSelectChange = (e, data) => {
+        this.setMonth(data);
+    }
+
+    SelectList = (props) => {
+        let popup = props.data.map((data) => {
+            return (
+                <div key={data}>
+                    <a href="#" onClick={(e)=> {this.onSelectChange(e, data)}}>
+                        {data}
+                    </a>
+                </div>
+            );
+        });
+        return (
+            <div className="month-popup">
+                {popup}
+            </div>
+        );
+    }
+
+    onChangeMonth = (e, month) => {
+        this.setState({
+            showMonthPopup: !this.state.showMonthPopup
+        });
+    }
+
+    MonthNav = () => {
+        return (
+            <span className="label-month"
+                onClick={(e) => { this.onChangeMonth(e, this.month()) }}>
+                {this.month()}
+                {this.state.showMonthPopup &&
+                    <this.SelectList data={this.months} />
+                }
+            </span>
+        );
     }
 
 
@@ -94,7 +142,7 @@ export default class Calendar extends Component {
         console.log(trElems);
 
         //function for All Month List
-        
+
 
         return (
             <div>
@@ -102,12 +150,11 @@ export default class Calendar extends Component {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th colSpan="7">{this.month()}</th>
+                            <th colSpan="7"><this.MonthNav /></th>
                         </tr>
                         <tr>{weekdays}</tr>
                     </thead>
                     <tbody>
-
                         {trElems}
                     </tbody>
                 </Table>
