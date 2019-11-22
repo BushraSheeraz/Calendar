@@ -42,6 +42,7 @@ export default class Calendar extends Component {
         return firstDay;
     }
 
+    //functions for All Month List
     setMonth = (month) => {
         let monthNo = this.months.indexOf(month);
         let dateContext = Object.assign({}, this.state.dateContext);
@@ -141,7 +142,6 @@ export default class Calendar extends Component {
         });
         console.log(trElems);
 
-        //function for All Month List
 
 
         return (
@@ -149,7 +149,7 @@ export default class Calendar extends Component {
                 <h2>Calendar</h2>
                 <Table striped bordered hover>
                     <thead>
-                        <tr>
+                        <tr className="months">
                             <th colSpan="7"><this.MonthNav /></th>
                         </tr>
                         <tr>{weekdays}</tr>

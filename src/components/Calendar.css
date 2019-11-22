@@ -21,3 +21,6 @@ tr, td{
     margin: 20px;
     background-color: tomato;
 }
+tr:hover {
+    cursor :pointer;
+}
