@@ -17,6 +17,7 @@ export default class Calendar extends Component {
 
     weekDays = moment.weekdaysShort();
     months = moment.months();
+    currentYear = moment.year;
 
 
     // Functions for Year,Month,Date
@@ -59,7 +60,7 @@ export default class Calendar extends Component {
         let popup = props.data.map((data) => {
             return (
                 <div key={data}>
-                    <a href="#" onClick={(e)=> {this.onSelectChange(e, data)}}>
+                    <a href="#" onClick={(e) => { this.onSelectChange(e, data) }}>
                         {data}
                     </a>
                 </div>
@@ -88,6 +89,40 @@ export default class Calendar extends Component {
                 }
             </span>
         );
+    }
+
+
+    showYearEditor = () => {
+        this.setState({
+            showYearNav: true
+        });
+    }
+
+    setYear = (year) => {
+        let dateContext = Object.assign({}, this.state.dateContext);
+        dateContext = moment(dateContext).set("year" , year);
+        this.setState({
+            dateContext : dateContext
+        })
+    }
+
+    onYearChange = (e) => {
+        this.setYear(e.target.value);
+        this.props.onYearChange && this.props.onYearChange(e, e.target.value);
+    }
+    
+    YearNav = () => {
+        return (
+            this.state.showYearNav ?
+                <input type="number" placeholder= "year" 
+                defaultValue = {this.year()}
+                ref={(yearInput) => {this.yearInput = yearInput}}
+                onKeyUp = {(e) => {this.onKeyUpYear(e)}}
+                onChange = {(e) => {this.onYearChange(e)}}></input> :
+                <span onDoubleClick={(e) => { this.showYearEditor() }}>
+                    {this.year()}
+                </span>
+        )
     }
 
 
@@ -150,7 +185,9 @@ export default class Calendar extends Component {
                 <Table striped bordered hover>
                     <thead>
                         <tr className="months">
-                            <th colSpan="7"><this.MonthNav /></th>
+                            <th colSpan="5"><this.MonthNav /></th>
+                            <th colSpan="2"><this.YearNav/></th>
+
                         </tr>
                         <tr>{weekdays}</tr>
                     </thead>
