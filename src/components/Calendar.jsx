@@ -100,9 +100,9 @@ export default class Calendar extends Component {
 
     setYear = (year) => {
         let dateContext = Object.assign({}, this.state.dateContext);
-        dateContext = moment(dateContext).set("year" , year);
+        dateContext = moment(dateContext).set("year", year);
         this.setState({
-            dateContext : dateContext
+            dateContext: dateContext
         })
     }
 
@@ -110,15 +110,15 @@ export default class Calendar extends Component {
         this.setYear(e.target.value);
         this.props.onYearChange && this.props.onYearChange(e, e.target.value);
     }
-    
+
     YearNav = () => {
         return (
             this.state.showYearNav ?
-                <input type="number" placeholder= "year" 
-                defaultValue = {this.year()}
-                ref={(yearInput) => {this.yearInput = yearInput}}
-                onKeyUp = {(e) => {this.onKeyUpYear(e)}}
-                onChange = {(e) => {this.onYearChange(e)}}></input> :
+                <input type="number" placeholder="year"
+                    defaultValue={this.year()}
+                    ref={(yearInput) => { this.yearInput = yearInput }}
+                    onKeyUp={(e) => { this.onKeyUpYear(e) }}
+                    onChange={(e) => { this.onYearChange(e) }}></input> :
                 <span onDoubleClick={(e) => { this.showYearEditor() }}>
                     {this.year()}
                 </span>
@@ -172,7 +172,7 @@ export default class Calendar extends Component {
 
         let trElems = rows.map((d, i) => {
             return (
-                <tr>{d}</tr>
+                <tr colSpan="2">{d}</tr>
             )
         });
         console.log(trElems);
@@ -186,7 +186,7 @@ export default class Calendar extends Component {
                     <thead>
                         <tr className="months">
                             <th colSpan="5"><this.MonthNav /></th>
-                            <th colSpan="2"><this.YearNav/></th>
+                            <th colSpan="2"><this.YearNav /></th>
 
                         </tr>
                         <tr>{weekdays}</tr>
