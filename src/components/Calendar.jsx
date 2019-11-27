@@ -11,7 +11,7 @@ export default class Calendar extends Component {
             today: moment(),
             allMonths: moment.months(),
             showYearPopup: false,
-            showMonthPopup: false
+            showMonthPopup: false,
         }
     }
 
@@ -43,7 +43,8 @@ export default class Calendar extends Component {
         return firstDay;
     }
 
-    //functions for All Month List
+
+    /* functions for All Month List */
     setMonth = (month) => {
         let monthNo = this.months.indexOf(month);
         let dateContext = Object.assign({}, this.state.dateContext);
@@ -59,7 +60,7 @@ export default class Calendar extends Component {
     SelectList = (props) => {
         let popup = props.data.map((data) => {
             return (
-                <div key={data}>
+                <div key={data} className="abc">
                     <a href="#" onClick={(e) => { this.onSelectChange(e, data) }}>
                         {data}
                     </a>
@@ -90,7 +91,9 @@ export default class Calendar extends Component {
             </span>
         );
     }
+    /* -----------------***************------------------  */
 
+    /*Functions for Year changing */
 
     showYearEditor = () => {
         this.setState({
@@ -125,20 +128,24 @@ export default class Calendar extends Component {
         )
     }
 
+    /* -----------------**************-------------------*/
 
     render() {
+        // Week Days
         let weekdays = this.weekDays.map((day) => {
             return (
                 <td key={day}>{day}</td>
             )
         });
 
+        // Blank spaces in a month
         let blanks = [];
         for (let i = 0; i < this.firstDayOfMonth(); i++) {
-            blanks.push(<td className="blanks">{""}</td>);
+            blanks.push(<td key={blanks} className="blanks">{""}</td>);
         }
-        console.log("blanks :", blanks);
+        // console.log("blanks :", blanks);
 
+        // days in a month
         let daysInMonth = [];
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let className = (d == this.currentDay() ? "current-day" : "day")
@@ -148,9 +155,10 @@ export default class Calendar extends Component {
                 </td>
             )
         }
-        console.log("days :", daysInMonth);
+        // console.log("days :", daysInMonth);
+        // console.log(moment().format('h:mm:ss a'));
 
-
+        /* TotalSlots= total number of blank spaces occupy and total days in a months */
         let totalSlots = [...blanks, ...daysInMonth];
         let rows = [];
         let cells = [];
@@ -170,40 +178,46 @@ export default class Calendar extends Component {
             }
         });
 
+        // dates in a month
         let trElems = rows.map((d, i) => {
             return (
-                <tr colSpan="2">{d}</tr>
+                <tr colSpan="2" className="table-elements">{d}</tr>
             )
         });
-        console.log(trElems);
-
+        // console.log(trElems);
 
 
         return (
-            <div>
-                <h2>Calendar</h2>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr className="months">
-                            <th colSpan="5"><this.MonthNav /></th>
-                            <th colSpan="2"><this.YearNav /></th>
-
-                        </tr>
-                        <tr>{weekdays}</tr>
-                    </thead>
-                    <tbody>
-                        {trElems}
-                    </tbody>
-                </Table>
-                {/* <table>
-                    <thead>
-                        <tr></tr>
-                    </thead>
-                    <tbody>
-                        <tr>{weekdays}</tr>
-                        {trElems}
-                    </tbody>
-                </table> */}
+            <div className="main">
+                {/* <h2>Calendar</h2> */}
+                <div className="cale">
+                    <div className="clock-div">
+                        <span className="clock">
+                            {moment().format('h:mm:ss a')}
+                        </span>
+                    </div>
+                    <div className="Taskbar-div">
+                        <div className="taskbar">
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div className="main-calendar">
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr className="months">
+                                <th colSpan="5" className="table-elements">{<this.MonthNav />}</th>
+                                <th colSpan="2" className="table-elements">{<this.YearNav />}</th>
+                            </tr>
+                            <tr className="table-elements">{weekdays}</tr>
+                        </thead>
+                        <tbody>
+                            {trElems}
+                            <tr></tr>
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         );
     }

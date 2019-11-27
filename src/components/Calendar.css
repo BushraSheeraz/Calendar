@@ -1,26 +1,87 @@
-/* table{
-    border: 2px solid black;
-}
-tr, td{
-    border: 1px solid;
-    padding: 5px 10px;
-}
-.day-current-day{
-    padding: 5px;
-    color: black;
-}
-.day{
-    padding: 5px;
-    color: black;
-} */
 .current-day{
-    background-color: rgb(138, 138, 248);
-    color: white;
-}
-.theme{
-    margin: 20px;
-    background-color: tomato;
+    color: rgb(250, 53, 53);
+    font-weight: 900;
+    background-color: sandybrown;
+    /* color: white; */
 }
 tr:hover {
     cursor :pointer;
+}
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+.cale{
+    width: 200px;
+    background: url(../images/pexels-photo-1591447.jpeg);
+    background-size: cover;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+.month-popup{
+    width: 150px;
+    height: auto;
+    background-color: beige;
+    position: absolute;
+    z-index: 0;
+    border: 2px;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+.clock-div{
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+}
+.clock{
+    border: 2px solid rgba(255, 235, 205, 0.178);
+    text-align: center;
+    padding: 4px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px 1px #e6af77;
+    background-color: rgba(255, 235, 205, 0.178);
+}
+.Taskbar-div{
+    border-top: 2px solid black;
+    display: flex;
+    justify-content: center;
+    padding: 10px 5px;
+}
+.taskbar{
+    width: auto;
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.021);
+    background-color: rgba(255, 217, 159, 0.452);
+}
+.main-calendar{
+    background-color: #f09c57b4;
+}
+.table-elements{
+    background-image: linear-gradient(#eca062, #f1c6a3 );
+}
+
+
+
+
+/* Media Queries */
+@media only screen and (max-width: 500px){
+    .main{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 40px;
+    }
+    .cale{
+        width: auto;
+        background-color: aqua;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+    }
 }
