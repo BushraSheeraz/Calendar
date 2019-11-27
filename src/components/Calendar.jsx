@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import Table from 'react-bootstrap/Table';
-import { thisExpression } from '@babel/types';
+import { FontAwesomeIcon } from '../../node_modules/@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default class Calendar extends Component {
     constructor(props) {
@@ -12,12 +13,14 @@ export default class Calendar extends Component {
             allMonths: moment.months(),
             showYearPopup: false,
             showMonthPopup: false,
+            // currentTime: moment(),
         }
     }
 
     weekDays = moment.weekdaysShort();
     months = moment.months();
     currentYear = moment.year;
+    // currentTime = moment.time;
 
 
     // Functions for Year,Month,Date
@@ -36,6 +39,9 @@ export default class Calendar extends Component {
     }
     currentDay = () => {
         return this.state.dateContext.format('D');
+    }
+    currentTime = () => {
+        return this.state.dateContext.format("h:mm:ss a")
     }
     firstDayOfMonth = () => {
         let dateContext = this.state.dateContext;
@@ -130,6 +136,29 @@ export default class Calendar extends Component {
 
     /* -----------------**************-------------------*/
 
+    /* -----Function for changing month on icons click----*/
+    nextMonth = () => {
+        let dateContext = Object.assign({}, this.state.dateContext);
+        dateContext = moment(dateContext).add(1, "month");
+        this.setState({
+            dateContext: dateContext
+        });
+    }
+
+    prevMonth = () => {
+        let dateContext = Object.assign({}, this.state.dateContext);
+        dateContext = moment(dateContext).subtract(1, "month");
+        this.setState({
+            dateContext: dateContext
+        });
+    }
+
+    // componentDidMount() {
+    //     this.currentTime = setInterval((() => {
+    //         this.currentTime();
+    //     }), 1000);
+    // }
+
     render() {
         // Week Days
         let weekdays = this.weekDays.map((day) => {
@@ -193,7 +222,10 @@ export default class Calendar extends Component {
                 <div className="cale">
                     <div className="clock-div">
                         <span className="clock">
-                            {moment().format('h:mm:ss a')}
+                            {moment().format('hh:mm:ss a')}
+                        </span>
+                        <span className="Date">
+                            {moment().format('MMMM Do YYYY')}
                         </span>
                     </div>
                     <div className="Taskbar-div">
@@ -207,7 +239,14 @@ export default class Calendar extends Component {
                     <Table striped bordered hover>
                         <thead>
                             <tr className="months">
-                                <th colSpan="5" className="table-elements">{<this.MonthNav />}</th>
+                                <th colSpan="5" className="table-elements">{
+                                    <div className="Month-nav">
+                                        <FontAwesomeIcon icon={faChevronLeft} onClick={(e) => { this.prevMonth() }} />
+                                        <this.MonthNav />
+                                        <FontAwesomeIcon icon={faChevronRight} onClick={(e) => { this.nextMonth() }} />
+                                    </div>
+                                }
+                                </th>
                                 <th colSpan="2" className="table-elements">{<this.YearNav />}</th>
                             </tr>
                             <tr className="table-elements">{weekdays}</tr>
