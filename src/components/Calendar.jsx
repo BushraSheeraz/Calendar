@@ -13,14 +13,13 @@ export default class Calendar extends Component {
             allMonths: moment.months(),
             showYearPopup: false,
             showMonthPopup: false,
-            // currentTime: moment(),
+            currentTime: moment(),
         }
     }
 
     weekDays = moment.weekdaysShort();
     months = moment.months();
     currentYear = moment.year;
-    // currentTime = moment.time;
 
 
     // Functions for Year,Month,Date
@@ -153,11 +152,12 @@ export default class Calendar extends Component {
         });
     }
 
-    // componentDidMount() {
-    //     this.currentTime = setInterval((() => {
-    //         this.currentTime();
-    //     }), 1000);
-    // }
+    componentDidMount() {
+        setInterval(
+            () => this.setState({ currentTime: moment() }),
+            1000
+          );
+    }
 
     render() {
         // Week Days
@@ -185,7 +185,7 @@ export default class Calendar extends Component {
             )
         }
         // console.log("days :", daysInMonth);
-        // console.log(moment().format('h:mm:ss a'));
+        console.log(moment().format('h:mm:ss a'));
 
         /* TotalSlots= total number of blank spaces occupy and total days in a months */
         let totalSlots = [...blanks, ...daysInMonth];
