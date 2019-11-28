@@ -152,11 +152,13 @@ export default class Calendar extends Component {
         });
     }
 
+
+    // live clock--- changing  time every second
     componentDidMount() {
         setInterval(
             () => this.setState({ currentTime: moment() }),
             1000
-          );
+        );
     }
 
     render() {
@@ -185,7 +187,7 @@ export default class Calendar extends Component {
             )
         }
         // console.log("days :", daysInMonth);
-        console.log(moment().format('h:mm:ss a'));
+        // console.log(moment().format('h:mm:ss a'));
 
         /* TotalSlots= total number of blank spaces occupy and total days in a months */
         let totalSlots = [...blanks, ...daysInMonth];
