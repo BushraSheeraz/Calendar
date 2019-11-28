@@ -222,7 +222,7 @@ export default class Calendar extends Component {
                 <div className="cale">
                     <div className="clock-div">
                         <span className="clock">
-                            {moment().format('hh:mm:ss a')}
+                            {moment().format('hh:mm:ss A')}
                         </span>
                         <span className="Date">
                             {moment().format('MMMM Do YYYY')}
