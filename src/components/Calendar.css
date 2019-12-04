@@ -7,14 +7,24 @@
 tr:hover {
     cursor :pointer;
 }
+h2{
+    background-color: #da8d40;
+    padding: 8px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: black;
+    text-shadow: 2px 2px 1px rgb(187, 31, 4);
+}
 .main{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    margin-top: 40px;
 }
-.cale{
-    width: 200px;
+.calendar-component{
+    background-color: burlywood;
+}
+.side-div{
+    width: 35%;
     background: url(../images/pexels-photo-1591447.jpeg);
     background-size: cover;
     height: auto;
@@ -37,14 +47,12 @@ tr:hover {
     flex-direction: column;
     justify-content: center;
     padding: 20px 0px;
-   
-
 }
 .clock{
     text-align: center;
-    padding: 4px;
-    height: 50px;
-    font-size: 25px;
+    padding: 15px;
+    height: auto;
+    font-size: 35px;
     font-weight: bold;
     color: black;
     text-shadow: 2px 2px 1px #e6af77;
@@ -54,9 +62,9 @@ tr:hover {
 }
 .Date{
     text-align: center;
-    padding: 4px;
+    padding: 15px;
     color: black;
-    font-size: 20px;
+    font-size: 35px;
     font-weight: bold;
     text-shadow: 2px 2px 1px #e6af77;
     background-color: rgba(255, 235, 205, 0.178);
@@ -76,7 +84,13 @@ tr:hover {
     background-color: rgba(255, 217, 159, 0.452);
 }
 .main-calendar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f09c57b4;
+    width: 65%;
+    height: 90vh;
+    border: 10px solid black;
 }
 .table-elements{
     background-image: linear-gradient(#eca062, #f1c6a3 );
@@ -84,6 +98,7 @@ tr:hover {
 .Month-nav{
     display: flex;
     justify-content: space-between;
+    padding: 20px;
 }
 
 
@@ -95,13 +110,19 @@ tr:hover {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-top: 40px;
     }
-    .cale{
+    .side-div{
         width: auto;
-        background-color: aqua;
-        height: 200px;
+        height: auto;
         display: flex;
         justify-content: center;
+    }
+    .main-calendar{
+        background-color: #f09c57b4;
+        width: auto;
+        border: 5px solid black;
+    }
+    .clock , .Date{
+        font-size: 25px;
     }
 }

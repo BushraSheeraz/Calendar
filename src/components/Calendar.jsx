@@ -212,54 +212,56 @@ export default class Calendar extends Component {
         // dates in a month
         let trElems = rows.map((d, i) => {
             return (
-                <tr colSpan="2" className="table-elements">{d}</tr>
+                <tr colSpan="2" className="table-elements abc">{d}</tr>
             )
         });
         // console.log(trElems);
 
 
         return (
-            <div className="main">
-                {/* <h2>Calendar</h2> */}
-                <div className="cale">
-                    <div className="clock-div">
-                        <span className="clock">
-                            {moment().format('hh:mm:ss A')}
-                        </span>
-                        <span className="Date">
-                            {moment().format('MMMM Do YYYY')}
-                        </span>
-                    </div>
-                    <div className="Taskbar-div">
-                        <div className="taskbar">
-                            <p></p>
-                            <p></p>
+            <section className="calendar-component">
+                <h2>Calendar</h2>
+                <div className="main">
+                    <div className="side-div">
+                        <div className="clock-div">
+                            <span className="clock">
+                                {moment().format('hh:mm:ss A')}
+                            </span>
+                            <span className="Date">
+                                {moment().format('MMMM Do YYYY')}
+                            </span>
+                        </div>
+                        <div className="Taskbar-div">
+                            <div className="taskbar">
+                                <p></p>
+                                <p></p>
+                            </div>
                         </div>
                     </div>
+                    <div className="main-calendar">
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr className="months">
+                                    <th colSpan="5" className="table-elements">{
+                                        <div className="Month-nav">
+                                            <FontAwesomeIcon icon={faChevronLeft} onClick={(e) => { this.prevMonth() }} />
+                                            <this.MonthNav />
+                                            <FontAwesomeIcon icon={faChevronRight} onClick={(e) => { this.nextMonth() }} />
+                                        </div>
+                                    }
+                                    </th>
+                                    <th colSpan="2" className="table-elements">{<this.YearNav />}</th>
+                                </tr>
+                                <tr className="table-elements abc">{weekdays}</tr>
+                            </thead>
+                            <tbody>
+                                {trElems}
+                                <tr></tr>
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
-                <div className="main-calendar">
-                    <Table striped bordered hover>
-                        <thead>
-                            <tr className="months">
-                                <th colSpan="5" className="table-elements">{
-                                    <div className="Month-nav">
-                                        <FontAwesomeIcon icon={faChevronLeft} onClick={(e) => { this.prevMonth() }} />
-                                        <this.MonthNav />
-                                        <FontAwesomeIcon icon={faChevronRight} onClick={(e) => { this.nextMonth() }} />
-                                    </div>
-                                }
-                                </th>
-                                <th colSpan="2" className="table-elements">{<this.YearNav />}</th>
-                            </tr>
-                            <tr className="table-elements">{weekdays}</tr>
-                        </thead>
-                        <tbody>
-                            {trElems}
-                            <tr></tr>
-                        </tbody>
-                    </Table>
-                </div>
-            </div>
+            </section>
         );
     }
 }
